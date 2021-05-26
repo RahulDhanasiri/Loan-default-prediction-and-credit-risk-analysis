@@ -157,4 +157,111 @@ Performance evaluation for pruned tree
 
 ![image](https://user-images.githubusercontent.com/47473472/119584178-be8ecc80-bd8d-11eb-8f62-bf693b4d746f.png)
 
+We used 70% of the data as training data and 30% of the data as validation data as the sensitivity of this proportion is 0.9985 whereas the sensitivity of 50:50 (training data : Test data) is 0.9785.
 
+The model’s performance is evaluated based on accuracy, sensitivity, and CP.
+
+Sensitivity = TP/TP+FN
+
+TP = 230123
+
+FN = 343
+
+Sensitivity = 230123/ 230466 = 0.9985
+
+Area of curve = 0.6568
+
+As the mean of the probability of charged-off is approximately 30%, we took the threshold value as 0.30.
+
+Fully Paid Charged Off
+10.9219745 0.07802555
+20.9219745 0.07802555
+30.9219745 0.07802555
+40.8224753 0.17752467
+50.9219745 0.07802555
+60.8224753 0.17752467
+70.8224753 0.17752467
+80.9219745 0.07802555
+90.8224753 0.17752467
+100.9219745 0.07802555
+
+The variable importance of the decision tree is
+1.	int_rate
+2.	sub_grade
+3.	grade
+4.	addr_state
+
+The variable importance is obtained based on the node impurity and business knowledge of the data.
+
+Confusion Matrix (Charged Off):
+
+![image](https://user-images.githubusercontent.com/47473472/119584491-3eb53200-bd8e-11eb-8681-ee4fc8802b42.png)
+
+5. Confusion Matrix of test data of random forest:
+
+Below is the output of random forest model and we have finally chosen the random forest with the number of trees set to 200. Upon performance evaluation we found out that with an increase in the number of trees from 20 to 200 the area under ROC curve increases from .65 to approximately .68. This is in alignment with the theory that bootstrap sampling ensemble method will increase the performance accuracy of the model and as we increase the number of trees, more number of out of bag samples we have to validate our model and perform well on new unseen data.
+
+The most important variable seems to be consistent in both decision tree and random forest model ie., subgrade...
+
+![image](https://user-images.githubusercontent.com/47473472/119584618-83d96400-bd8e-11eb-96a0-f8b10dad297e.png)
+
+Sensitivity = TP/TP+FN
+
+TP = 23589
+
+FN=57
+
+Sensitivity = 23589/23,646= 0.9995
+
+Area under curve = 0.6821
+
+ROC Curve for DT:
+
+![image](https://user-images.githubusercontent.com/47473472/119584642-92c01680-bd8e-11eb-998d-e6943a0d6359.png)
+
+
+Lift Curve: DT
+
+Lift curve is a measure of performance of a targeting model at classifying cases as having an enhanced response, measured against a random choice of targeting model. Here we have taken the opposite target variable and plotted it.
+
+![image](https://user-images.githubusercontent.com/47473472/119584649-9a7fbb00-bd8e-11eb-8605-149b27b96292.png)
+
+ROC random forest
+
+![image](https://user-images.githubusercontent.com/47473472/119584669-a53a5000-bd8e-11eb-8e29-6ebb8385026f.png)
+
+Area under curve: 68.21
+
+Lift Curve: Random Forest
+
+![image](https://user-images.githubusercontent.com/47473472/119584683-b4b99900-bd8e-11eb-92fc-3dbeebf9bddf.png)
+
+Confusion Matrix of Random Forest:
+
+![image](https://user-images.githubusercontent.com/47473472/119584704-bf742e00-bd8e-11eb-84c3-1623f7c08ce1.png)
+
+
+RF model:
+
+![image](https://user-images.githubusercontent.com/47473472/119584721-c8fd9600-bd8e-11eb-8938-97b98cef1950.png)
+
+![image](https://user-images.githubusercontent.com/47473472/119584829-1417a900-bd8f-11eb-84ed-6b3dd8e0b2ee.png)
+
+
+![image](https://user-images.githubusercontent.com/47473472/119584799-fea27f00-bd8e-11eb-9e9d-dc87d87500c5.png)
+
+
+![image](https://user-images.githubusercontent.com/47473472/119584732-cef37700-bd8e-11eb-94fd-ec200750eb12.png)
+
+ROC Comparisons:
+
+The AUC of Random forest model is greater than that of decision tree and pruned decision tree. AUC (random forest model) = .6821 compared to AUC (decision tree) = .646. Hence the random forest seems to be a better classifier and seems to be correct because conceptually it combines different bootstrap samples to create a better classifier.
+
+6.b
+
+Profit Curve:
+
+![image](https://user-images.githubusercontent.com/47473472/119584913-3d383980-bd8f-11eb-9972-f6ab5c51494a.png)
+
+
+We plotted cumulative profit against the number of cases and we come to observe that the maximum cumulative profit is 67300 which we get is from top 16077 cases when the score for each decile is ordered in descending order.
